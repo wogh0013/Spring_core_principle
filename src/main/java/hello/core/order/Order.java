@@ -7,6 +7,7 @@ public class Order {
     private int itemPrice;     //상품가격
     private int discountPrice; //할인가격
 
+    //생성자
     public Order(Long memberId, String itemName, int itemPrice, int discountPrice) {
         this.memberId = memberId;
         this.itemName = itemName;
@@ -14,10 +15,12 @@ public class Order {
         this.discountPrice = discountPrice;
     }
 
+    //실제 가격을 출력하기 위한 메서드 추가
     public int calculatePrice(){
         return itemPrice - discountPrice;
     }
 
+    //getter & setter 작성
     public Long getMemberId() {
         return memberId;
     }
