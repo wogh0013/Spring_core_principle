@@ -1,5 +1,9 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService{
 
     //기존 코드
@@ -14,6 +18,7 @@ public class MemberServiceImpl implements MemberService{
     //생성자
     //MemoryMemberRepository는 AppConfig에서 생성되어
     //MemberSerivceImpl 생성자의 매개변수를 통해 전달될 뿐이다. -> 생성자 주입
+    @Autowired // ac.getBean(MemberRepository.class) 의 동작을 한다고 보면 됨.
     public MemberServiceImpl(MemberRepository memberRepository){
         this.memberRepository = memberRepository;
     }
@@ -25,6 +30,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member findMember(Long memberId) {
+
         return memberRepository.findById(memberId);
     }
 }

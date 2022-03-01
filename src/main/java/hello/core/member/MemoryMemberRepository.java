@@ -1,8 +1,11 @@
 package hello.core.member;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository {
 
     //HashMap은 Map인터페이스의 구현 클래스이다.(null값 허용)
@@ -12,11 +15,13 @@ public class MemoryMemberRepository implements MemberRepository {
 
     @Override
     public void save(Member member) {
+
         store.put(member.getId(), member);
     }
 
     @Override
     public Member findById(Long memberId) {
+
         return store.get(memberId);
     }
 }
