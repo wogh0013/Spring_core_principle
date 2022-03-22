@@ -4,15 +4,20 @@
   3. 인터넷 계층 - IP
   4. 네트워크 인터페이스 계층
 
+
 TCP (전송 제어 프로토콜, Transmission Control Protocol)
  1. 연결지향 - TCP 3 way handshake(가상 연결)
  2. 데이터 전달 보증
  3. 순서 보장
  4. 신뢰할 수 있는 프로토콜
  5. 현재는 대부분 TCP 사용
-  
-
-
+ 6. PORT 사용
+ 
+IP가 아파트, PORT는 몇 동 몇 호~ 
+IP : 목적지 서버를 찾는 것
+PORT : 같은 IP 내에서 프로세스 구분
+       서버 안에서 애플리케이션들을 구분하는 것
+출발지 PORT, 목적지 PORT
 
 
 
