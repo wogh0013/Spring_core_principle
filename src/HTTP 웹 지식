@@ -19,7 +19,74 @@ PORT : 같은 IP 내에서 프로세스 구분
        서버 안에서 애플리케이션들을 구분하는 것
 출발지 PORT, 목적지 PORT
 
+IP : 지정한 IP 주소에 패킷 단위로 데이터 전달
+    BUT 비연결성, 비신뢰성, 포트 X 라는 한계점 존재
 
+IP는 변경될 수 있다. IP는 기억하기 쉽지 않다.
+ -> DNS(Domain Name System)
+ -> 도메인명을 IP주소로 변환 
+
+URI (Uniform Resource Identifier) - 소스를 식별하는 통합된 방법
+1. Uniform    : 리소스를 식별하는 통일된 방식
+2. Resource   : 자원, URI로 식별할 수 있는 모든 것
+3. Identifier : 다른 항목과 구분하는 데 필요한 정보
+ - URL (Uniform Resource Locator) : 리소스가 있는 위치를 지정
+ - URN (Uniform Resource Name)    : 리소스의 이름 
+ - 위치는 변할 수 있지만, 이름은 변하지 않는다.
+ - URI 와 URL은 거의 같은 의미임.
+
+ URL scheme
+  scheme://[userinfo@]host[:port][/path][?query][#fragment]
+  https://www.google.com:443/search?q=hello?hl=ko
+    - 주로 프로토콜 사용(http, https, ftp 등)
+    - 프로토콜 : 어떤 방식으로 자원에 접근할 것인가?하는 규칙
+    - 주로 http는 80포트, https는 443포트 사용 (포트는 생략 가능)
+    - https는 http에 보안 추가(HTTP Secure)
+    - 요즘 대부분 https 사용
+
+    - host : 호스트명, 도메인명 또는 IP주소를 직접 사용
+    - port : 접속 포트, 일반적으로 생략, http 80, https 443
+    - path : 리소스 경로, 계층적 구조 (/home/file1.jpg, /members/100 ..)
+    - query : key=value 형태, ?로 시작, &로 추가 가능(?keyA=valueA&keyB=valueB)
+             query parameter, query string 등으로 불림     
+    - fragment : 서버에 전송되는 정보는 X, 잘 사용X
+
+HTTP 메시지 전송
+ 1. 웹 브라우저가 HTTP 메시지 생성
+ 2. SOCKET 라이브러리를 통해 전달
+  - A: TCP/IP 연결(IP, PORT)
+  - B: 데이터 전달
+ 3. TCP/IP 패킷 생성, HTTP 메시지 포함
+
+
+ HTTP(HyperText Transfer Protocol)
+  : HTTP 메시지에 모든 것을 전송한다.
+  - HTML, TEXT, IMAGE, 음성, 영상, 파일
+  - JSON, XML (API) 등 거의 모든 형태의 데이터 전송 가능
+  - 서버 간 데이터 전송도 대부분 HTTP 사용
+  - 특징
+   1. 클라이언트-서버 구조
+     : 클라이언트가 Request(요청)를 보내면, 서버가 Response(응답)을 해서 동작
+   2. 무상태 프로토콜(stateless), 비연결성
+      stateless : 서버가 클라이언트의 상태를 보존 X
+                  클라이언트 요청 증가 -> 서버 대거 투입 가능
+                  응답 서버를 쉽게 바꿀 수 있음(무한한 서버 증설 가능)
+                  웹을 설계할 때 최대한 무상태, 어쩔 수 없을 때만 상태유지
+      비연결성 : 매우 빠른 속도로 응답
+                수천 명이 서비스를 사용해도, 실제 서버에서 동시에 처리하는 요청은 적음
+                서버 자원을 매우 효율적으로 사용 가능
+                But, TCP/IP 연결을 새로 해야 함 -> 시간 낭비
+                      -> 지속 연결(Persistent Connections)로 문제 해결                   
+   3. HTTP 메시지
+   4. 단순함, 확장 가능
+
+멱등 : 한 번 호출하든 백 번 호출하든 결과가 똑같다.
+ - GET : 한 번 조회하든, 두 번 조회하든 같은 결과과 조회된다.
+ - PUT : 결과를 대체한다. 따라서 같은 요청을 여러 번 해도 최종 결과는 같다.
+ - DELETE : 결과를 삭제한다. 같은 요청을 여러 번 해도 삭제된 결과는 같다.
+ - POST : 멱등이 아니다. 두 번 호출하면 같은 결제가 중복해서 발생할 수 있다.   
+- 멱등은 외부 요인으로 중간에 리소스가 변경되는 것까지는 고려하지 않는다.
+  동일한 사용자가 똑같은 행동을 반복하는 것에 대해서만 고려한다.
 
 
 
